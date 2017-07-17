@@ -225,7 +225,8 @@ void MainWindow::on_dotSignBtn_clicked()
 
 void MainWindow::on_equalSignBtn_clicked()
 {
+    computer.infix2Postfix();
     computer.computeResult();
     QString rst = QString::number(computer.getResult());
-    ui->resultDisplayLbl->setText(rst);
+    ui->resultDisplayLbl->setText(ui->resultDisplayLbl->text() + rst);
 }

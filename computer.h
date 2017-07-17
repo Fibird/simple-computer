@@ -16,13 +16,13 @@ private:
     stack<Sign> signStack;
     queue<Sign> postfixExp;
     double result;
-    void infix2Postfix();
 public:
     Computer();
     void pushStack(Sign s);
     double getResult();
     void clearStack();
     Sign popStack();
+    void infix2Postfix();
     void computeResult();
 };
 

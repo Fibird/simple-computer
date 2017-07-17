@@ -1,7 +1,10 @@
 #include "computer.h"
 #include <QString>
+#include <QDebug>
 #include <string>
 #include <sstream>
+
+#define QT_NO_DEBUG_OUTPUT
 
 using std::string;
 using std::ostringstream;
@@ -30,6 +33,7 @@ void Computer::clearStack()
 
 void Computer::infix2Postfix()
 {
+    QDebug debug = qDebug();
     while (!record.empty())
     {
         Sign s = record.front();
@@ -37,21 +41,29 @@ void Computer::infix2Postfix()
         if (s.getType() == NUM)
         {
             postfixExp.push(s);
+            debug << s.getSign();
         }
         else if (s.getType() == OPT
                  || s.getType() == LPAR)
         {
             // insert terminator '$' of a number
-            postfixExp.push(Sign('$', NUM, -1));
+            if ((postfixExp.back().getSign() != '$')
+                    && (postfixExp.back().getType() != OPT))
+            {
+                postfixExp.push(Sign('$', NUM, -1));
+                debug << '$';
+            }
+
             while (!signStack.empty())
             {
                 Sign tmp = signStack.top();
                 if (tmp.getPriority() < s.getPriority()
-                        || s.getType() == LPAR)
+                        || tmp.getType() == LPAR)
                 {
                     break;
                 }
                 postfixExp.push(tmp);
+                debug << tmp.getSign();
                 signStack.pop();
             }
             signStack.push(s);
@@ -59,7 +71,11 @@ void Computer::infix2Postfix()
         else if (s.getType() == RPAR)
         {
             // insert terminator '$' of a number
-            postfixExp.push(Sign('$', NUM, -1));
+            if (postfixExp.back().getSign() != '$')
+            {
+                postfixExp.push(Sign('$', NUM, -1));
+                debug << '$';
+            }
             while (!signStack.empty())
             {
                 Sign tmp = signStack.top();
@@ -68,21 +84,30 @@ void Computer::infix2Postfix()
                 {
                     break;
                 }
+                postfixExp.push(tmp);
+                debug << tmp.getSign();
             }
         }
+    }
+    if ((postfixExp.back().getType() == NUM)
+            && postfixExp.back().getSign() != '$')
+    {
+        postfixExp.push(Sign('$', NUM, -1));
     }
     while (!signStack.empty())
     {
         Sign tmp = signStack.top();
         signStack.pop();
         postfixExp.push(tmp);
+        debug << tmp.getSign();
     }
 }
 
 void Computer::computeResult()
 {
-    stack<Sign> Stack;
-    QString num;
+    stack<double> Stack;
+    QString num = "";
+
     while (!postfixExp.empty())
     {
         Sign tmp = postfixExp.front();
@@ -90,31 +115,30 @@ void Computer::computeResult()
         postfixExp.pop();
         if (tmp.getType() == NUM)
         {
-            Stack.push(tmp);
+            while (tmp.getSign() != '$')
+            {
+                num.append(tmp.getSign());
+                tmp = postfixExp.front();
+                postfixExp.pop();
+            }
+
+            qDebug() << "number: " << num;
+            Stack.push(num.toDouble());
+            num.clear();
         }
         else if (tmp.getType() == OPT)
         {
+
             // pop two numbers
-            while (!Stack.empty())
+            double rightNum, leftNum;
+            if (!Stack.empty())
             {
-                Sign tmp = Stack.top();
+                rightNum = Stack.top();
                 Stack.pop();
-                if (tmp.getSign() == '$')
-                    break;
-                num.insert(0, tmp.getSign());
-            }
-            double rightNum = num.toDouble();
-            num.clear();
-            while (!Stack.empty())
-            {
-                Sign tmp = Stack.top();
+                leftNum = Stack.top();
                 Stack.pop();
-                if (tmp.getSign() == '$')
-                    break;
-                num.insert(0, tmp.getSign());
             }
-            double leftNum = num.toDouble();
-            num.clear();
+
             // compute according operator
             switch (tmp.getSign())
             {
@@ -136,26 +160,12 @@ void Computer::computeResult()
             }
 
             // push result into stack
-            ostringstream strs;
-            strs << leftNum;
-            string rst = strs.str();
-            for (int i = 0; i < rst.length(); i++)
-            {
-                Stack.push(Sign(rst[i], NUM, -1));
-            }
-            Stack.push(Sign('$', NUM, -1));
+            Stack.push(leftNum);
         }
     }
 
-    while (!Stack.empty())
-    {
-        Sign tmp = Stack.top();
-        Stack.pop();
-        if (tmp.getSign() == '$')
-            break;
-        num.insert(0, tmp.getSign());
-    }
-    result = num.toDouble();
+    if (!Stack.empty())
+        result = Stack.top();
 }
 
 double Computer::getResult()
