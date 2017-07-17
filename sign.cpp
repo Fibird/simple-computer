@@ -17,3 +17,8 @@ int Sign::getPriority()
 {
     return priority;
 }
+
+SignType Sign::getType()
+{
+    return type;
+}

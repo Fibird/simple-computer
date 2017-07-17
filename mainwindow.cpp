@@ -222,3 +222,10 @@ void MainWindow::on_dotSignBtn_clicked()
           tmp = ".";
     ui->numDisplayLbl->setText(tmp);
 }
+
+void MainWindow::on_equalSignBtn_clicked()
+{
+    computer.computeResult();
+    QString rst = QString::number(computer.getResult());
+    ui->resultDisplayLbl->setText(rst);
+}

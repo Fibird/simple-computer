@@ -19,6 +19,7 @@ public:
     Sign(char _sign, SignType _type, int _priority);
     char getSign();
     int getPriority();
+    SignType getType();
 };
 
 #endif // SIGN_H

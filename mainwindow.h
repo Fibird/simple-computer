@@ -55,6 +55,8 @@ private slots:
 
     void on_dotSignBtn_clicked();
 
+    void on_equalSignBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     Computer computer;
