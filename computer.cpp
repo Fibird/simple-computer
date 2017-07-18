@@ -45,6 +45,14 @@ void Computer::clearStack()
     {
         record.clear();
     }
+    while (!signStack.empty())
+    {
+        signStack.pop();
+    }
+    while (!postfixExp.empty())
+    {
+        postfixExp.pop();
+    }
 }
 
 void Computer::infix2Postfix()
