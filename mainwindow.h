@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "computer.h"
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -15,7 +16,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    void keyPressEvent(QKeyEvent *event);
 private slots:
     void on_num1Btn_clicked();
 

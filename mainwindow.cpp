@@ -350,3 +350,69 @@ void MainWindow::on_equalSignBtn_clicked()
     }
     ui->resultDisplayLbl->setText(rst);
 }
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_0:
+        on_num0Btn_clicked();
+        break;
+    case Qt::Key_1:
+        on_num1Btn_clicked();
+        break;
+    case Qt::Key_2:
+        on_num2Btn_clicked();
+        break;
+    case Qt::Key_3:
+        on_num3Btn_clicked();
+        break;
+    case Qt::Key_4:
+        on_num4Btn_clicked();
+        break;
+    case Qt::Key_5:
+        on_num5Btn_clicked();
+        break;
+    case Qt::Key_6:
+        on_num6Btn_clicked();
+        break;
+    case Qt::Key_7:
+        on_num7Btn_clicked();
+        break;
+    case Qt::Key_8:
+        on_num8Btn_clicked();
+        break;
+    case Qt::Key_9:
+        on_num9Btn_clicked();
+        break;
+    case Qt::Key_Plus:
+        on_plusOptBtn_clicked();
+        break;
+    case Qt::Key_Minus:
+        on_minusOptBtn_clicked();
+        break;
+    case Qt::Key_Asterisk:
+        on_timesOptBtn_clicked();
+        break;
+    case Qt::Key_Slash:
+        on_DivOptBtn_clicked();
+        break;
+    case Qt::Key_Period:
+        on_dotSignBtn_clicked();
+        break;
+    case Qt::Key_ParenLeft:
+        on_leftParBtn_clicked();
+        break;
+    case Qt::Key_ParenRight:
+        on_rightParBtn_clicked();
+        break;
+    case Qt::Key_Delete:
+    case Qt::Key_Backspace:
+        on_delBtn_clicked();
+        break;
+    case Qt::Key_Enter:
+        on_equalSignBtn_clicked();
+        break;
+    default:
+        break;
+    }
+}
