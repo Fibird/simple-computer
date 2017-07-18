@@ -3,8 +3,9 @@
 #include <QDebug>
 #include <string>
 #include <sstream>
+#include <exception>
 
-#define QT_NO_DEBUG_OUTPUT
+using std::exception;
 
 using std::string;
 using std::ostringstream;
@@ -20,13 +21,11 @@ void Computer::pushStack(Sign s)
     record.push_back(s);
 }
 
-Sign Computer::popStack()
+void Computer::popStack()
 {
     if (!record.empty())
     {
-        Sign tmp = record.back();
         record.pop_back();
-        return tmp;
     }
 }
 
@@ -40,7 +39,7 @@ void Computer::clearStack()
 
 void Computer::infix2Postfix()
 {
-    QDebug debug = qDebug();
+    //QDebug debug = qDebug();
     while (!record.empty())
     {
         Sign s = record.front();
@@ -48,17 +47,17 @@ void Computer::infix2Postfix()
         if (s.getType() == NUM)
         {
             postfixExp.push(s);
-            debug << s.getSign();
+            //debug << s.getSign();
         }
         else if (s.getType() == OPT
                  || s.getType() == LPAR)
         {
             // insert terminator '$' of a number
-            if ((postfixExp.back().getSign() != '$')
+            if (!postfixExp.empty() && (postfixExp.back().getSign() != '$')
                     && (postfixExp.back().getType() != OPT))
             {
                 postfixExp.push(Sign('$', NUM, -1));
-                debug << '$';
+                //debug << '$';
             }
 
             while (!signStack.empty())
@@ -70,7 +69,7 @@ void Computer::infix2Postfix()
                     break;
                 }
                 postfixExp.push(tmp);
-                debug << tmp.getSign();
+                //debug << tmp.getSign();
                 signStack.pop();
             }
             signStack.push(s);
@@ -78,10 +77,11 @@ void Computer::infix2Postfix()
         else if (s.getType() == RPAR)
         {
             // insert terminator '$' of a number
-            if (postfixExp.back().getSign() != '$')
+            if (!postfixExp.empty()
+                    && postfixExp.back().getSign() != '$')
             {
                 postfixExp.push(Sign('$', NUM, -1));
-                debug << '$';
+                //debug << '$';
             }
             while (!signStack.empty())
             {
@@ -92,12 +92,13 @@ void Computer::infix2Postfix()
                     break;
                 }
                 postfixExp.push(tmp);
-                debug << tmp.getSign();
+                //debug << tmp.getSign();
             }
         }
     }
-    if ((postfixExp.back().getType() == NUM)
-            && postfixExp.back().getSign() != '$')
+    if (!postfixExp.empty()
+            && (postfixExp.back().getType() == NUM)
+            && (postfixExp.back().getSign() != '$'))
     {
         postfixExp.push(Sign('$', NUM, -1));
     }
@@ -106,7 +107,7 @@ void Computer::infix2Postfix()
         Sign tmp = signStack.top();
         signStack.pop();
         postfixExp.push(tmp);
-        debug << tmp.getSign();
+        //debug << tmp.getSign();
     }
 }
 
@@ -125,13 +126,31 @@ void Computer::computeResult()
             while (tmp.getSign() != '$')
             {
                 num.append(tmp.getSign());
-                tmp = postfixExp.front();
-                postfixExp.pop();
+                if (!postfixExp.empty())
+                {
+                    tmp = postfixExp.front();
+                    postfixExp.pop();
+                }
+                else
+                {
+                    // error
+                    throw exception();
+                }
             }
 
             qDebug() << "number: " << num;
-            Stack.push(num.toDouble());
-            num.clear();
+            bool isok;
+            double dblNum = num.toDouble(&isok);
+            if (isok)
+            {
+                Stack.push(dblNum);
+                num.clear();
+            }
+            else
+            {
+                // error
+                throw exception();
+            }
         }
         else if (tmp.getType() == OPT)
         {
@@ -142,8 +161,16 @@ void Computer::computeResult()
             {
                 rightNum = Stack.top();
                 Stack.pop();
-                leftNum = Stack.top();
-                Stack.pop();
+                if (!Stack.empty())
+                {
+                    leftNum = Stack.top();
+                    Stack.pop();
+                }
+                else
+                {
+                    // error
+                    throw exception();
+                }
             }
 
             // compute according operator

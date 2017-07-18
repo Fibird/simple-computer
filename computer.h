@@ -22,7 +22,7 @@ public:
     void pushStack(Sign s);
     double getResult();
     void clearStack();
-    Sign popStack();
+    void popStack();
     void infix2Postfix();
     void computeResult();
     void setHasComputed(bool flag);

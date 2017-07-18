@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "computer.h"
+#include <exception>
+#include <QDebug>
+
+using std::exception;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -316,9 +320,26 @@ void MainWindow::on_dotSignBtn_clicked()
 
 void MainWindow::on_equalSignBtn_clicked()
 {
-    computer.infix2Postfix();
-    computer.computeResult();
+    QString rst;
+    bool hasError = false;
+    try
+    {
+        computer.infix2Postfix();
+        computer.computeResult();
+    }
+    catch (exception e)
+    {
+        hasError = true;
+        computer.clearStack();
+    }
     computer.setHasComputed(true);
-    QString rst = QString::number(computer.getResult());
-    ui->resultDisplayLbl->setText("=" + rst);
+    if (!hasError)
+    {
+        rst = "=" + QString::number(computer.getResult());
+    }
+    else
+    {
+        rst = "Bad Expression!";
+    }
+    ui->resultDisplayLbl->setText(rst);
 }
