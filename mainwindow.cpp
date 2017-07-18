@@ -24,9 +24,9 @@ void MainWindow::on_plusOptBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-         tmp += "+";
+        tmp += "+";
     else
-          tmp = "+";
+        tmp = "+";
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -40,9 +40,9 @@ void MainWindow::on_minusOptBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-         tmp += "-";
+        tmp += "-";
     else
-          tmp = "-";
+        tmp = "-";
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -56,9 +56,9 @@ void MainWindow::on_timesOptBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-         tmp += "*";
+        tmp += "*";
     else
-          tmp = "*";
+        tmp = "*";
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -72,9 +72,9 @@ void MainWindow::on_DivOptBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-           tmp += "/";
+        tmp += "/";
     else
-           tmp = "/";
+        tmp = "/";
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -247,9 +247,9 @@ void MainWindow::on_leftParBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-         tmp += "(";
+        tmp += "(";
     else
-          tmp = "(";
+        tmp = "(";
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -264,9 +264,9 @@ void MainWindow::on_rightParBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-         tmp += ")";
+        tmp += ")";
     else
-          tmp = ")";
+        tmp = ")";
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -308,9 +308,9 @@ void MainWindow::on_dotSignBtn_clicked()
         computer.setHasComputed(false);
     }
     if (tmp != "0")
-         tmp += ".";
+        tmp += ".";
     else
-          tmp = ".";
+        tmp = ".";
     ui->numDisplayLbl->setText(tmp);
 }
 
