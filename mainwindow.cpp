@@ -18,6 +18,11 @@ void MainWindow::on_plusOptBtn_clicked()
 {
     computer.pushStack(Sign('+', OPT, 1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
          tmp += "+";
     else
@@ -29,6 +34,11 @@ void MainWindow::on_minusOptBtn_clicked()
 {
     computer.pushStack(Sign('-', OPT, 1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
          tmp += "-";
     else
@@ -40,6 +50,11 @@ void MainWindow::on_timesOptBtn_clicked()
 {
     computer.pushStack(Sign('*', OPT, 2));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
          tmp += "*";
     else
@@ -51,6 +66,11 @@ void MainWindow::on_DivOptBtn_clicked()
 {
     computer.pushStack(Sign('/', OPT, 2));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
            tmp += "/";
     else
@@ -62,6 +82,11 @@ void MainWindow::on_num1Btn_clicked()
 {
     computer.pushStack(Sign('1', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "1";
     else
@@ -73,6 +98,11 @@ void MainWindow::on_num2Btn_clicked()
 {
     computer.pushStack(Sign('2', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "2";
     else
@@ -85,6 +115,11 @@ void MainWindow::on_num3Btn_clicked()
 {
     computer.pushStack(Sign('3', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "3";
     else
@@ -96,6 +131,11 @@ void MainWindow::on_num4Btn_clicked()
 {
     computer.pushStack(Sign('4', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "4";
     else
@@ -107,6 +147,11 @@ void MainWindow::on_num5Btn_clicked()
 {
     computer.pushStack(Sign('5', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "5";
     else
@@ -118,6 +163,11 @@ void MainWindow::on_num6Btn_clicked()
 {
     computer.pushStack(Sign('6', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "6";
     else
@@ -129,6 +179,11 @@ void MainWindow::on_num7Btn_clicked()
 {
     computer.pushStack(Sign('7', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "7";
     else
@@ -140,6 +195,11 @@ void MainWindow::on_num8Btn_clicked()
 {
     computer.pushStack(Sign('8', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "8";
     else
@@ -151,6 +211,11 @@ void MainWindow::on_num9Btn_clicked()
 {
     computer.pushStack(Sign('9', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "9";
     else
@@ -162,6 +227,11 @@ void MainWindow::on_num0Btn_clicked()
 {
     computer.pushStack(Sign('0', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
         tmp += "0";
     ui->numDisplayLbl->setText(tmp);
@@ -171,6 +241,11 @@ void MainWindow::on_leftParBtn_clicked()
 {
     computer.pushStack(Sign('(', LPAR, 3));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
          tmp += "(";
     else
@@ -183,6 +258,11 @@ void MainWindow::on_rightParBtn_clicked()
 {
     computer.pushStack(Sign(')', RPAR, 3));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
          tmp += ")";
     else
@@ -193,6 +273,11 @@ void MainWindow::on_rightParBtn_clicked()
 void MainWindow::on_delBtn_clicked()
 {
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp.length() == 1)
     {
         tmp = "0";
@@ -209,6 +294,7 @@ void MainWindow::on_delBtn_clicked()
 void MainWindow::on_ACbtn_clicked()
 {
     ui->numDisplayLbl->setText("0");
+    ui->resultDisplayLbl->setText("=");
     computer.clearStack();
 }
 
@@ -216,6 +302,11 @@ void MainWindow::on_dotSignBtn_clicked()
 {
     computer.pushStack(Sign('.', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
+    if (computer.getHasComputed())
+    {
+        tmp = "0";
+        computer.setHasComputed(false);
+    }
     if (tmp != "0")
          tmp += ".";
     else
@@ -227,6 +318,7 @@ void MainWindow::on_equalSignBtn_clicked()
 {
     computer.infix2Postfix();
     computer.computeResult();
+    computer.setHasComputed(true);
     QString rst = QString::number(computer.getResult());
-    ui->resultDisplayLbl->setText(ui->resultDisplayLbl->text() + rst);
+    ui->resultDisplayLbl->setText("=" + rst);
 }

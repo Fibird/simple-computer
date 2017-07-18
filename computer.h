@@ -16,6 +16,7 @@ private:
     stack<Sign> signStack;
     queue<Sign> postfixExp;
     double result;
+    bool hasComputed;
 public:
     Computer();
     void pushStack(Sign s);
@@ -24,6 +25,8 @@ public:
     Sign popStack();
     void infix2Postfix();
     void computeResult();
+    void setHasComputed(bool flag);
+    bool getHasComputed();
 };
 
 #endif // COMPUTER_H

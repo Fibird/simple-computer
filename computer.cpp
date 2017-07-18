@@ -11,7 +11,8 @@ using std::ostringstream;
 
 Computer::Computer()
 {
-
+    result = 0;
+    hasComputed = false;
 }
 
 void Computer::pushStack(Sign s)
@@ -21,14 +22,20 @@ void Computer::pushStack(Sign s)
 
 Sign Computer::popStack()
 {
-    Sign tmp = record.back();
-    record.pop_back();
-    return tmp;
+    if (!record.empty())
+    {
+        Sign tmp = record.back();
+        record.pop_back();
+        return tmp;
+    }
 }
 
 void Computer::clearStack()
 {
-    record.clear();
+    if (!record.empty())
+    {
+        record.clear();
+    }
 }
 
 void Computer::infix2Postfix()
@@ -171,4 +178,14 @@ void Computer::computeResult()
 double Computer::getResult()
 {
     return result;
+}
+
+void Computer::setHasComputed(bool flag)
+{
+    hasComputed = flag;
+}
+
+bool Computer::getHasComputed()
+{
+    return hasComputed;
 }
