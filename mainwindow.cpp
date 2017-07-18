@@ -36,8 +36,15 @@ void MainWindow::on_plusOptBtn_clicked()
 
 void MainWindow::on_minusOptBtn_clicked()
 {
-    computer.pushStack(Sign('-', OPT, 1));
+    Sign s('-', OPT, 1);
     QString tmp = ui->numDisplayLbl->text();
+    // judge if '-' is negative symbol
+    if (computer.isEmpty()
+            || computer.getBack().getType() == OPT)
+    {
+        s.setType(NUM);
+    }
+    computer.pushStack(s);
     if (computer.getHasComputed())
     {
         tmp = "0";

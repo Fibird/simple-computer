@@ -23,6 +23,8 @@ public:
     double getResult();
     void clearStack();
     void popStack();
+    Sign getBack();
+    bool isEmpty();
     void infix2Postfix();
     void computeResult();
     void setHasComputed(bool flag);

@@ -22,3 +22,13 @@ SignType Sign::getType()
 {
     return type;
 }
+
+void Sign::setSign(char s)
+{
+    sign = s;
+}
+
+void Sign::setType(SignType t)
+{
+    type = t;
+}

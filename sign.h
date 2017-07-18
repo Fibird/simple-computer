@@ -18,8 +18,10 @@ private:
 public:
     Sign(char _sign, SignType _type, int _priority);
     char getSign();
+    void setSign(char s);
     int getPriority();
     SignType getType();
+    void setType(SignType t);
 };
 
 #endif // SIGN_H

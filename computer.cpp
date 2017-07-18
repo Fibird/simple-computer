@@ -29,6 +29,16 @@ void Computer::popStack()
     }
 }
 
+Sign Computer::getBack()
+{
+    return record.back();
+}
+
+bool Computer::isEmpty()
+{
+    return record.empty();
+}
+
 void Computer::clearStack()
 {
     if (!record.empty())
