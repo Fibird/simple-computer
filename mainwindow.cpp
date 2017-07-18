@@ -2,8 +2,10 @@
 #include "ui_mainwindow.h"
 #include "computer.h"
 #include <exception>
+#include <string>
 #include <QDebug>
 
+using std::string;
 using std::exception;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -20,7 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_plusOptBtn_clicked()
 {
-    computer.pushStack(Sign('+', OPT, 1));
+    //computer.pushStack(Sign('+', OPT, 1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -36,15 +38,15 @@ void MainWindow::on_plusOptBtn_clicked()
 
 void MainWindow::on_minusOptBtn_clicked()
 {
-    Sign s('-', OPT, 1);
+    //Sign s('-', OPT, 1);
     QString tmp = ui->numDisplayLbl->text();
     // judge if '-' is negative symbol
-    if (computer.isEmpty()
-            || computer.getBack().getType() == OPT)
-    {
-        s.setType(NUM);
-    }
-    computer.pushStack(s);
+//    if (computer.isEmpty()
+//            || computer.getBack().getType() == OPT)
+//    {
+//        s.setType(NUM);
+//    }
+//    computer.pushStack(s);
     if (computer.getHasComputed())
     {
         tmp = "0";
@@ -59,7 +61,7 @@ void MainWindow::on_minusOptBtn_clicked()
 
 void MainWindow::on_timesOptBtn_clicked()
 {
-    computer.pushStack(Sign('*', OPT, 2));
+    //computer.pushStack(Sign('*', OPT, 2));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -75,7 +77,7 @@ void MainWindow::on_timesOptBtn_clicked()
 
 void MainWindow::on_DivOptBtn_clicked()
 {
-    computer.pushStack(Sign('/', OPT, 2));
+    //computer.pushStack(Sign('/', OPT, 2));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -91,7 +93,7 @@ void MainWindow::on_DivOptBtn_clicked()
 
 void MainWindow::on_num1Btn_clicked()
 {
-    computer.pushStack(Sign('1', NUM, -1));
+    //computer.pushStack(Sign('1', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -107,7 +109,7 @@ void MainWindow::on_num1Btn_clicked()
 
 void MainWindow::on_num2Btn_clicked()
 {
-    computer.pushStack(Sign('2', NUM, -1));
+    //computer.pushStack(Sign('2', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -124,7 +126,7 @@ void MainWindow::on_num2Btn_clicked()
 
 void MainWindow::on_num3Btn_clicked()
 {
-    computer.pushStack(Sign('3', NUM, -1));
+    //computer.pushStack(Sign('3', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -140,7 +142,7 @@ void MainWindow::on_num3Btn_clicked()
 
 void MainWindow::on_num4Btn_clicked()
 {
-    computer.pushStack(Sign('4', NUM, -1));
+    //computer.pushStack(Sign('4', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -156,7 +158,7 @@ void MainWindow::on_num4Btn_clicked()
 
 void MainWindow::on_num5Btn_clicked()
 {
-    computer.pushStack(Sign('5', NUM, -1));
+   // computer.pushStack(Sign('5', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -172,7 +174,7 @@ void MainWindow::on_num5Btn_clicked()
 
 void MainWindow::on_num6Btn_clicked()
 {
-    computer.pushStack(Sign('6', NUM, -1));
+    //computer.pushStack(Sign('6', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -188,7 +190,7 @@ void MainWindow::on_num6Btn_clicked()
 
 void MainWindow::on_num7Btn_clicked()
 {
-    computer.pushStack(Sign('7', NUM, -1));
+    //computer.pushStack(Sign('7', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -204,7 +206,7 @@ void MainWindow::on_num7Btn_clicked()
 
 void MainWindow::on_num8Btn_clicked()
 {
-    computer.pushStack(Sign('8', NUM, -1));
+    //computer.pushStack(Sign('8', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -220,7 +222,7 @@ void MainWindow::on_num8Btn_clicked()
 
 void MainWindow::on_num9Btn_clicked()
 {
-    computer.pushStack(Sign('9', NUM, -1));
+    //computer.pushStack(Sign('9', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -236,7 +238,7 @@ void MainWindow::on_num9Btn_clicked()
 
 void MainWindow::on_num0Btn_clicked()
 {
-    computer.pushStack(Sign('0', NUM, -1));
+    //computer.pushStack(Sign('0', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -250,7 +252,7 @@ void MainWindow::on_num0Btn_clicked()
 
 void MainWindow::on_leftParBtn_clicked()
 {
-    computer.pushStack(Sign('(', LPAR, 3));
+    //computer.pushStack(Sign('(', LPAR, 3));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -267,7 +269,7 @@ void MainWindow::on_leftParBtn_clicked()
 
 void MainWindow::on_rightParBtn_clicked()
 {
-    computer.pushStack(Sign(')', RPAR, 3));
+    //computer.pushStack(Sign(')', RPAR, 3));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -292,12 +294,12 @@ void MainWindow::on_delBtn_clicked()
     if (tmp.length() == 1)
     {
         tmp = "0";
-        computer.clearStack();
+        //computer.clearStack();
     }
     else
     {
         tmp.remove(tmp.length() - 1, 1);
-        computer.popStack();
+        //computer.popStack();
     }
     ui->numDisplayLbl->setText(tmp);
 }
@@ -311,7 +313,7 @@ void MainWindow::on_ACbtn_clicked()
 
 void MainWindow::on_dotSignBtn_clicked()
 {
-    computer.pushStack(Sign('.', NUM, -1));
+    //computer.pushStack(Sign('.', NUM, -1));
     QString tmp = ui->numDisplayLbl->text();
     if (computer.getHasComputed())
     {
@@ -329,6 +331,47 @@ void MainWindow::on_equalSignBtn_clicked()
 {
     QString rst;
     bool hasError = false;
+    // push expression into record of computer
+    string exp = ui->numDisplayLbl->text().toStdString();
+    for (int i = 0; i < exp.length(); i++)
+    {
+        if (exp[i] >= '0' && exp[i] <= '9'
+                || exp[i] == '.')
+        {
+            computer.pushStack(Sign(exp[i], NUM, -1));
+        }
+        else if (exp[i] == '+')
+        {
+            computer.pushStack(Sign(exp[i], OPT, 1));
+        }
+        else if (exp[i] == '-')
+        {
+            // judge if '-' is negative symbol
+            if (computer.isEmpty()
+                    || computer.getBack().getType() == OPT)
+            {
+                computer.pushStack(Sign(exp[i], NUM, -1));
+            }
+            else
+            {
+                computer.pushStack(Sign(exp[i], OPT, 1));
+            }
+        }
+        else if (exp[i] == '*'
+                 || exp[i] == '/')
+        {
+            computer.pushStack(Sign(exp[i], OPT, 2));
+        }
+        else if (exp[i] == '(')
+        {
+            computer.pushStack(Sign(exp[i], LPAR, 3));
+        }
+        else if (exp[i] == ')')
+        {
+            computer.pushStack(Sign(exp[i], RPAR, 3));
+        }
+    }
+    // process and compute
     try
     {
         computer.infix2Postfix();
