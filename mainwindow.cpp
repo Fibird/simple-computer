@@ -22,72 +22,65 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_plusOptBtn_clicked()
 {
-    //computer.pushStack(Sign('+', OPT, 1));
     QString tmp = ui->numDisplayLbl->text();
+
     if (computer.getHasComputed())
     {
-        tmp = "0";
+        tmp = computer.getResultStr() + "+";
         computer.setHasComputed(false);
     }
-    if (tmp != "0")
-        tmp += "+";
     else
-        tmp = "+";
+    {
+        tmp += "+";
+    }
     ui->numDisplayLbl->setText(tmp);
 }
 
 void MainWindow::on_minusOptBtn_clicked()
 {
-    //Sign s('-', OPT, 1);
     QString tmp = ui->numDisplayLbl->text();
-    // judge if '-' is negative symbol
-//    if (computer.isEmpty()
-//            || computer.getBack().getType() == OPT)
-//    {
-//        s.setType(NUM);
-//    }
-//    computer.pushStack(s);
+
     if (computer.getHasComputed())
     {
-        tmp = "0";
+        tmp = computer.getResultStr() + "-";
         computer.setHasComputed(false);
     }
-    if (tmp != "0")
-        tmp += "-";
     else
-        tmp = "-";
+    {
+        tmp += "-";
+    }
     ui->numDisplayLbl->setText(tmp);
 }
 
 void MainWindow::on_timesOptBtn_clicked()
 {
-    //computer.pushStack(Sign('*', OPT, 2));
     QString tmp = ui->numDisplayLbl->text();
+
     if (computer.getHasComputed())
     {
-        tmp = "0";
+        tmp = computer.getResultStr() + "*";
         computer.setHasComputed(false);
     }
-    if (tmp != "0")
-        tmp += "*";
     else
-        tmp = "*";
+    {
+        tmp += "*";
+    }
     ui->numDisplayLbl->setText(tmp);
 }
 
 void MainWindow::on_DivOptBtn_clicked()
 {
-    //computer.pushStack(Sign('/', OPT, 2));
     QString tmp = ui->numDisplayLbl->text();
+
     if (computer.getHasComputed())
     {
-        tmp = "0";
+        tmp = computer.getResultStr() + "/";
         computer.setHasComputed(false);
     }
-    if (tmp != "0")
-        tmp += "/";
     else
-        tmp = "/";
+    {
+        tmp += "/";
+    }
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -309,6 +302,7 @@ void MainWindow::on_ACbtn_clicked()
     ui->numDisplayLbl->setText("0");
     ui->resultDisplayLbl->setText("=");
     computer.clearStack();
+    computer.setHasComputed(false);
 }
 
 void MainWindow::on_dotSignBtn_clicked()
@@ -331,8 +325,21 @@ void MainWindow::on_equalSignBtn_clicked()
 {
     QString rst;
     bool hasError = false;
-    // push expression into record of computer
     string exp = ui->numDisplayLbl->text().toStdString();
+
+    // push last result into record to make it join the
+    // next computing
+//    string lastResult = computer.getResultStr();
+
+//    if (computer.getHasComputed())
+//    {
+//        lastResult += exp;
+//        exp = lastResult;
+//        ui->numDisplayLbl->setText(
+//                    QString::fromStdString(exp));
+//    }
+
+    // push expression into record of computer
     for (int i = 0; i < exp.length(); i++)
     {
         if (exp[i] >= '0' && exp[i] <= '9'
@@ -340,11 +347,12 @@ void MainWindow::on_equalSignBtn_clicked()
         {
             computer.pushStack(Sign(exp[i], NUM, -1));
         }
-        else if (exp[i] == '+')
-        {
-            computer.pushStack(Sign(exp[i], OPT, 1));
-        }
-        else if (exp[i] == '-')
+//        else if (exp[i] == '+')
+//        {
+//            computer.pushStack(Sign(exp[i], OPT, 1));
+//        }
+        else if (exp[i] == '-'
+                 || exp[i] == '+')
         {
             // judge if '-' is negative symbol
             if (computer.isEmpty()

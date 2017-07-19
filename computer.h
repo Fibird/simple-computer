@@ -3,11 +3,14 @@
 #include <stack>
 #include <queue>
 #include <list>
+#include <string>
+#include <QString>
 #include "sign.h"
 
 using std::stack;
 using std::queue;
 using std::list;
+using std::string;
 
 class Computer
 {
@@ -21,6 +24,7 @@ public:
     Computer();
     void pushStack(Sign s);
     double getResult();
+    QString getResultStr();
     void clearStack();
     void popStack();
     Sign getBack();

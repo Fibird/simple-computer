@@ -225,6 +225,11 @@ double Computer::getResult()
     return result;
 }
 
+QString Computer::getResultStr()
+{
+    return QString::number(result);
+}
+
 void Computer::setHasComputed(bool flag)
 {
     hasComputed = flag;
