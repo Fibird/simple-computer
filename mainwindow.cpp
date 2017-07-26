@@ -287,12 +287,10 @@ void MainWindow::on_delBtn_clicked()
     if (tmp.length() == 1)
     {
         tmp = "0";
-        //computer.clearStack();
     }
     else
     {
         tmp.remove(tmp.length() - 1, 1);
-        //computer.popStack();
     }
     ui->numDisplayLbl->setText(tmp);
 }
@@ -314,10 +312,18 @@ void MainWindow::on_dotSignBtn_clicked()
         tmp = "0";
         computer.setHasComputed(false);
     }
-    if (tmp != "0")
+
+    if ((tmp[tmp.length() - 1] >= '0'
+            && tmp[tmp.length() - 1] <= '9')
+            || tmp[tmp.length() - 1] == '.')
+    {
         tmp += ".";
+    }
     else
-        tmp = ".";
+    {
+        tmp += "0.";
+    }
+
     ui->numDisplayLbl->setText(tmp);
 }
 
@@ -327,18 +333,6 @@ void MainWindow::on_equalSignBtn_clicked()
     bool hasError = false;
     string exp = ui->numDisplayLbl->text().toStdString();
 
-    // push last result into record to make it join the
-    // next computing
-//    string lastResult = computer.getResultStr();
-
-//    if (computer.getHasComputed())
-//    {
-//        lastResult += exp;
-//        exp = lastResult;
-//        ui->numDisplayLbl->setText(
-//                    QString::fromStdString(exp));
-//    }
-
     // push expression into record of computer
     for (int i = 0; i < exp.length(); i++)
     {
@@ -347,10 +341,6 @@ void MainWindow::on_equalSignBtn_clicked()
         {
             computer.pushStack(Sign(exp[i], NUM, -1));
         }
-//        else if (exp[i] == '+')
-//        {
-//            computer.pushStack(Sign(exp[i], OPT, 1));
-//        }
         else if (exp[i] == '-'
                  || exp[i] == '+')
         {
